@@ -1,0 +1,8 @@
+build/*
+!build/.gitignore
+
+.antlr/
+launch-project.sh
+
+node_modules/
+antlr

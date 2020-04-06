@@ -1,0 +1,46 @@
+/*
+Sample file for brms
+
+
+classic rule
+*/
+
+REGLE "some rule" PRIORITE=100
+    CONTEXTE arg1 (TypeArg1), actions (Actions)
+
+    SI actions.step === "some step" ET arg1.type === "some type"
+    ALORS
+        actions.nextStep = "some action";
+    FIN
+
+//  several 'and' condition
+
+REGLE "another rule" PRIORITE=99
+    CONTEXTE arg1 (TypeArg1), actions (Actions)
+
+    SI actions.step === "agreement ?"
+        ET arg1.proposition EST VRAI
+        ET arg1.numberOfProposition >= 1
+    ALORS
+        actions.nextStep = "confirmation";
+    FIN
+
+/* special char*/
+REGLE "other rule" PRIORITE=100
+    CONTEXTE arg1 (TypeArg1), arg2 (TypeArg2), actions (Actions)
+
+    SI actions.step === "step number 42"
+        ET arg2.cause EST DEFINI
+    ALORS
+        actions.nextStep = "do this thing";
+    FIN
+
+// several assignation
+REGLE "rule named plouf" PRIORITE=100
+    CONTEXTE arg1 (TypeArg1), actions (Actions)
+
+    SI actions.step === "nothing as been done"
+    ALORS
+        actions.previousStep = "do something";
+        actions.nextStep = false;
+    FIN

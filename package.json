@@ -1,0 +1,16 @@
+{
+  "name": "brms-linter",
+  "version": "0.0.1",
+  "description": "A linter for BRMS",
+  "main": "app.js",
+  "dependencies": {
+    "antlr4": "^4.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js ./sample.srl"
+  },
+  "author": "jeremiec",
+  "license": "MIT"
+}
