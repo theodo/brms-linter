@@ -1,0 +1,46 @@
+/*
+Sample file for brms
+
+
+classic rule
+*/
+
+REGLE "some rule" PRIORITE=100
+    CONTEXTE sinistre (Sinistre), actions (Actions)
+
+    SI actions.step === "type-du-sinistre" ET sinistre.type === "DDE"
+    ALORS
+        actions.nextStep = "some action";
+    FIN
+
+//  several 'and' condition
+
+REGLE "confirmation" PRIORITE=100
+    CONTEXTE sinistre (Sinistre), actions (Actions)
+
+    SI actions.step === "agreement ?"
+        ET sinistre.propositionAcceptee EST VRAI
+        ET sinistre.conditionsAcceptees >= 1
+    ALORS
+        actions.nextStep = "confirmation";
+    FIN
+
+/* special char*/
+REGLE "lorsque répondu" PRIORITE=100
+    CONTEXTE sinistre (Sinistre), degatDesEaux (DegatDesEaux), actions (Actions)
+
+    SI actions.step === "qualification/degat-des-eaux/reparation"
+        ET degatDesEaux.causeReparee EST DEFINI
+    ALORS
+        actions.nextStep = "qualification/degat-des-eaux/besoin-de-relogement";
+    FIN
+
+// several assignation
+REGLE "redirection cause repare répondu" PRIORITE=100
+    CONTEXTE sinistre (Sinistre), actions (Actions)
+
+    SI actions.step === "nothing as been done"
+    ALORS
+        actions.previousStep = "do something";
+        actions.nextStep = false;
+    FIN
