@@ -1,11 +1,10 @@
 const fs = require('fs');
 const antlr4 = require('antlr4');
-const BrmsLexer = require('./build/BrmsLexer').BrmsLexer;
-const BrmsParser = require('./build/BrmsParser').BrmsParser;
-const BrmsSyntaxErrorListener = require('./BrmsSyntaxErrorListener')
-  .BrmsSyntaxErrorListener;
-const linterRules = require('./linterRules').linterRules;
-const logger = require('./logger').logger;
+const { BrmsLexer } = require('./build/BrmsLexer');
+const { BrmsParser } = require('./build/BrmsParser');
+const { BrmsSyntaxErrorListener } = require('./BrmsSyntaxErrorListener');
+const { linterRules } = require('./linterRules');
+const { logger } = require('./logger');
 
 const parseContent = (err, contents) => {
   if (err) {
