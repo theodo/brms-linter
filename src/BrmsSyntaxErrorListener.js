@@ -1,10 +1,10 @@
 // implement an error listener to be able to get antlr error
-const antlr4 = require('antlr4');
+const antlr4 = require('antlr4')
 
 class BrmsSyntaxErrorListener extends antlr4.error.ErrorListener {
   constructor() {
-    super();
-    this.errors = [];
+    super()
+    this.errors = []
   }
 
   syntaxError(recognizer, offendingSymbol, line, column, msg, err) {
@@ -12,11 +12,11 @@ class BrmsSyntaxErrorListener extends antlr4.error.ErrorListener {
       line,
       column,
       msg,
-    });
+    })
   }
 
   getErrors() {
-    return this.errors;
+    return this.errors
   }
 }
-exports.BrmsSyntaxErrorListener = BrmsSyntaxErrorListener;
+exports.BrmsSyntaxErrorListener = BrmsSyntaxErrorListener

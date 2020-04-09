@@ -6,10 +6,14 @@
   "dependencies": {
     "antlr4": "^4.8.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "2.0.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js ./sample.srl"
+    "start": "node app.js ./sample.srl",
+    "prettier": "prettier --write \"src/**/*.js\"",
+    "test:prettier": "prettier --check \"src/**/*.js\""
   },
   "author": "jeremiec",
   "license": "MIT"
