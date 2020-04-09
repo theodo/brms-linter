@@ -83,6 +83,15 @@ BrmsListener.prototype.exitExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by BrmsParser#affirmation.
+BrmsListener.prototype.enterAffirmation = function(ctx) {
+};
+
+// Exit a parse tree produced by BrmsParser#affirmation.
+BrmsListener.prototype.exitAffirmation = function(ctx) {
+};
+
+
 // Enter a parse tree produced by BrmsParser#assignement.
 BrmsListener.prototype.enterAssignement = function(ctx) {
 };

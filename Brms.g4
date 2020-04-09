@@ -18,16 +18,16 @@ condition:
 
 conditionOperator: And | Or;
 
-booleanExpression: expression operator expression;
+booleanExpression:
+	expression ((operator expression) | affirmation);
 expression:
 	StringLiteral
 	| IdentifierWithAttribut
 	| (FloatNumber | DigitSequence)
-	| True
-	| False
-	| Defined
 	| AssignTrue
 	| AssignFalse;
+
+affirmation: Is ( Defined | True | False);
 
 assignement: IdentifierWithAttribut Assign expression ';';
 
@@ -36,7 +36,6 @@ argument: Identifier LeftParen Identifier RightParen;
 operator:
 	Equal
 	| NotEqual
-	| Is
 	| Less
 	| LessEqual
 	| Greater
