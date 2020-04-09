@@ -4,6 +4,7 @@ const BrmsLexer = require('./build/BrmsLexer').BrmsLexer;
 const BrmsParser = require('./build/BrmsParser').BrmsParser;
 const BrmsListener = require('./build/BrmsListener').BrmsListener;
 const linterRules = require('./linterRules').linterRules;
+const logger = require('./logger').logger;
 
 const parseContent = (err, contents) => {
   const chars = new antlr4.InputStream(contents);
@@ -12,24 +13,21 @@ const parseContent = (err, contents) => {
   const parser = new BrmsParser(tokens);
   parser.buildParseTrees = true;
   const { children: rules } = parser.rules();
-  console.log();
   const rulesValidationResult = Object.values(linterRules).map(
     (linterRuleValidator) => {
       return linterRuleValidator(rules);
     }
   );
-  if (rulesValidationResult.every(({ result }) => result)) {
-    console.log('No linter rule errors');
-  } else {
+  if (!rulesValidationResult.every(({ result }) => result)) {
     rulesValidationResult
       .filter(({ result }) => !result)
       .forEach(({ linterRuleName, errors }) => {
-        console.log(`Error for the rule: ${linterRuleName}`);
-        console.log(errors);
+        logger.logError(`Error for the rule: ${linterRuleName}`);
+        logger.logInfo(errors);
       });
   }
 };
 
 const filename = process.argv[2];
-console.log(filename);
+logger.logNotice(filename);
 fs.readFile(filename, 'utf8', parseContent);
