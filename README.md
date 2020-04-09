@@ -2,8 +2,8 @@
 
 ## Install the latest release
 
-```
-git clone --depth 1  --branch releases git@github.com:theodo/brms-linter.git
+```shell
+git clone --depth 1 --branch releases git@github.com:theodo/brms-linter.git
 ```
 
 ## Usage
@@ -11,20 +11,21 @@ git clone --depth 1  --branch releases git@github.com:theodo/brms-linter.git
 Single file:
 
 ```shell
-node app.js <filepath>
+node app.js filepath.srl
 ```
 
-To loop over files in a directory recursively:
+Several files, use a glob:
 
 ```shell
-for e in <directory path>/**/*.srl;do node app.js $e;done
+node app.js './**/*.srl'
 ```
 
 ### Update
 
 ```shell
+git checkout releases
 git fetch origin releases
-git reset --hard origin/releases
+git pull
 ```
 
 ## Dev
@@ -43,5 +44,6 @@ git reset --hard origin/releases
 ### Release :
 
 - From branch master:
-- Create branch releases (delete it in local in case of conflict)
-- Run `make build-parser` and **commit** the generated files
+- Checkout the releases branch `git checkout releases`
+- Merge master in releases `git merge master`
+- Run `make build-parser` and **amend the merge commit** with the generated files `git add -f build/*;git commit -v --no-edit --amend`
