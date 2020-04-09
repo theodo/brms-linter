@@ -4,7 +4,8 @@
   "description": "A linter for BRMS",
   "main": "app.js",
   "dependencies": {
-    "antlr4": "^4.8.0"
+    "antlr4": "4.8.0",
+    "glob": "7.1.6"
   },
   "devDependencies": {
     "eslint": "6.8.0",
