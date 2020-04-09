@@ -18,13 +18,15 @@ exports.FileParser = {
       process.exit(2)
     }
 
+    const brmsSyntaxErrorListener = new BrmsSyntaxErrorListener()
     const chars = new antlr4.InputStream(fileContent)
     const lexer = new BrmsLexer(chars)
+    lexer.removeErrorListeners()
+    lexer.addErrorListener(brmsSyntaxErrorListener)
     const tokens = new antlr4.CommonTokenStream(lexer)
     const parser = new BrmsParser(tokens)
     parser.buildParseTrees = true
     parser.removeErrorListeners()
-    const brmsSyntaxErrorListener = new BrmsSyntaxErrorListener()
     parser.addErrorListener(brmsSyntaxErrorListener)
     const { children: rules } = parser.rules()
 
