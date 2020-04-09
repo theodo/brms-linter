@@ -1,4 +1,7 @@
 grammar Brms;
+options {
+	language = JavaScript;
+}
 // Parser
 
 rules: ruleDeclaration+;
