@@ -22,5 +22,6 @@ exports.logger = {
   logWarning: (text) => logErrorEscape(FgYellow, text),
   logNotice: (text) => logEscape(FgBrightBlack, text),
   logInfo: (text) => logEscape(FgWhite, text),
+  logErrorInfo: (text) => logErrorEscape(FgWhite, text),
   logSuccess: (text) => logEscape(FgGreen, text),
 }

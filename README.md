@@ -2,8 +2,8 @@
 
 ## Install the latest release
 
-```
-git clone --depth 1  --branch releases git@github.com:theodo/brms-linter.git
+```shell
+git clone --depth 1 --branch releases git@github.com:theodo/brms-linter.git
 ```
 
 ## Usage
@@ -11,13 +11,13 @@ git clone --depth 1  --branch releases git@github.com:theodo/brms-linter.git
 Single file:
 
 ```shell
-node app.js <filepath>
+node app.js filepath.srl
 ```
 
-To loop over files in a directory recursively:
+Several files, use a glob:
 
 ```shell
-for e in <directory path>/**/*.srl;do node app.js $e;done
+node app.js './**/*.srl'
 ```
 
 ### Update

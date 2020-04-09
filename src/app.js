@@ -1,58 +1,76 @@
-const fs = require('fs')
-const antlr4 = require('antlr4')
-const { BrmsLexer } = require('../build/BrmsLexer')
-const { BrmsParser } = require('../build/BrmsParser')
-const { BrmsSyntaxErrorListener } = require('./BrmsSyntaxErrorListener')
-const { linterRules } = require('./linterRules')
+const glob = require('glob')
+const {
+  linterRules: { globalLinterRules },
+} = require('./linterRules')
 const { logger } = require('./logger')
+const { FileParser } = require('./FileParser')
 
-const parseContent = (err, contents) => {
+const processFiles = (pattern) => (err, files) => {
   if (err) {
     logger.logError(err)
     process.exit(2)
   }
+  if (files.length === 0) {
+    logger.logError(`No files matching the pattern were found: ${pattern}`)
+    process.exit(2)
+  }
 
-  const chars = new antlr4.InputStream(contents)
-  const lexer = new BrmsLexer(chars)
-  const tokens = new antlr4.CommonTokenStream(lexer)
-  const parser = new BrmsParser(tokens)
-  parser.buildParseTrees = true
-  parser.removeErrorListeners()
-  const brmsSyntaxErrorListener = new BrmsSyntaxErrorListener()
-  parser.addErrorListener(brmsSyntaxErrorListener)
-  const { children: rules } = parser.rules()
+  logger.logInfo('\n> Processing files')
+  const listOfAllRules = []
+  let lintError = false
+  for (const file of files) {
+    logger.logNotice(file)
+    const { syntaxErrors, singleFileLintValidation, rules } = FileParser.parse(
+      file
+    )
+    syntaxErrors.forEach(({ line, column, msg }) =>
+      logger.logError(`Syntax error: line ${line}, col ${column}: ${msg}`)
+    )
+    const hasLinterErrors = !singleFileLintValidation.every(
+      ({ result }) => result
+    )
+    if (hasLinterErrors) {
+      singleFileLintValidation
+        .filter(({ result }) => !result)
+        .forEach(({ linterRuleName, errors }) => {
+          logger.logError(`Error: ${linterRuleName}`)
+          logger.logErrorInfo(errors)
+        })
+    }
+    if (syntaxErrors.length > 0 || hasLinterErrors) {
+      lintError = true
+    }
+    listOfAllRules.push(rules)
+  }
 
-  const syntaxErrors = brmsSyntaxErrorListener.getErrors()
-  syntaxErrors.forEach(({ line, column, msg }) =>
-    logger.logError(`line ${line}, col ${column}: ${msg}`)
-  )
-
-  const rulesValidationResult = Object.values(linterRules).map(
+  logger.logInfo('\n> Validating global lint rules')
+  const globalLintValidation = Object.values(globalLinterRules).map(
     (linterRuleValidator) => {
-      return linterRuleValidator(rules)
+      return linterRuleValidator(listOfAllRules)
     }
   )
-  const hasLinterErrors = !rulesValidationResult.every(({ result }) => result)
-  if (hasLinterErrors) {
-    rulesValidationResult
-      .filter(({ result }) => !result)
-      .forEach(({ linterRuleName, errors }) => {
-        logger.logError(`Error for the rule: ${linterRuleName}`)
-        logger.logInfo(errors)
-      })
-  }
 
-  if (syntaxErrors.length > 0 || hasLinterErrors) {
+  globalLintValidation
+    .filter(({ result }) => !result)
+    .forEach(({ linterRuleName, errors }) => {
+      logger.logError(`Global Error: ${linterRuleName}`)
+      logger.logErrorInfo(errors)
+      lintError = true
+    })
+
+  if (lintError) {
     process.exit(1)
   }
-
-  process.exit(0)
 }
 
 exports.App = {
   run: () => {
-    const filename = process.argv[2]
-    logger.logNotice(filename)
-    fs.readFile(filename, 'utf8', parseContent)
+    if (process.argv.length <= 2) {
+      console.log('Usage: node app.js path/to/directory|file|glob')
+      process.exit(-1)
+    }
+
+    const pattern = process.argv[2]
+    glob(pattern, {}, processFiles(pattern))
   },
 }
