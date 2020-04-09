@@ -9,9 +9,12 @@ class BrmsSyntaxErrorListener extends antlr4.error.ErrorListener {
 
   syntaxError(recognizer, offendingSymbol, line, column, msg, err) {
     this.errors.push({
+      recognizer,
+      offendingSymbol,
       line,
       column,
       msg,
+      err,
     })
   }
 
