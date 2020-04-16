@@ -37,4 +37,4 @@ brmslint './**/*.srl'
 
 - bump package version
 - run `npm run build`
-- run `npm publish`
+- run `npm publish --access public`
