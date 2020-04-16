@@ -1,7 +1,7 @@
 const fs = require('fs')
 const antlr4 = require('antlr4')
-const { BrmsLexer } = require('../build/BrmsLexer')
-const { BrmsParser } = require('../build/BrmsParser')
+const { BrmsLexer } = require('./BrmsLexer')
+const { BrmsParser } = require('./BrmsParser')
 const { BrmsSyntaxErrorListener } = require('./BrmsSyntaxErrorListener')
 const {
   linterRules: { singleFileLinterRules },

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const glob = require('glob')
 const {
   linterRules: { globalLinterRules },
@@ -63,14 +64,14 @@ const processFiles = (pattern) => (err, files) => {
   }
 }
 
-exports.App = {
-  run: () => {
-    if (process.argv.length <= 2) {
-      console.log('Usage: node app.js path/to/directory|file|glob')
-      process.exit(-1)
-    }
+const run = () => {
+  if (process.argv.length <= 2) {
+    console.log('Usage: node app.js path/to/directory|file|glob')
+    process.exit(-1)
+  }
 
-    const pattern = process.argv[2]
-    glob(pattern, {}, processFiles(pattern))
-  },
+  const pattern = process.argv[2]
+  glob(pattern, {}, processFiles(pattern))
 }
+
+run()

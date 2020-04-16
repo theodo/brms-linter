@@ -3,7 +3,8 @@
 ## Install the latest release
 
 ```shell
-git clone --depth 1 --branch releases git@github.com:theodo/brms-linter.git
+npm install brmslint --save-dev
+yarn add brmslint --dev
 ```
 
 ## Usage
@@ -11,21 +12,13 @@ git clone --depth 1 --branch releases git@github.com:theodo/brms-linter.git
 Single file:
 
 ```shell
-node app.js filepath.srl
+brmslint filepath.srl
 ```
 
 Several files, use a glob:
 
 ```shell
-node app.js './**/*.srl'
-```
-
-### Update
-
-```shell
-git checkout releases
-git fetch origin releases
-git pull
+brmslint './**/*.srl'
 ```
 
 ## Dev
@@ -38,12 +31,10 @@ git pull
 
 ### Run
 
-- Run `make build-parser` to rebuild the parser
-- `npm start` to run it again sample.srl
+- `npm start` to run it against sample.srl
 
 ### Release :
 
-- From branch master:
-- Checkout the releases branch `git checkout releases`
-- Merge master in releases `git merge master`
-- Run `make build-parser` and **amend the merge commit** with the generated files `git add -f build/*;git commit -v --no-edit --amend`
+- bump package version
+- run `npm run build`
+- run `npm publish`

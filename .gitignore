@@ -1,6 +1,5 @@
-build/*
-!build/.gitignore
-
+build/
+bin/
 .antlr/
 launch-project.sh
 

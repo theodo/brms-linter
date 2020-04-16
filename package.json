@@ -1,13 +1,30 @@
 {
-  "name": "brms-linter",
+  "name": "brmslint",
   "version": "0.0.1",
   "description": "A linter for BRMS",
-  "main": "app.js",
+  "main": "bin/app.js",
+  "preferGlobal": true,
+  "bin": {
+    "brmslint": "bin/app.js"
+  },
+  "files": [
+    "bin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theodo/brms-linter.git"
+  },
+  "engines": {
+    "node": ">=10"
+  },
   "dependencies": {
     "antlr4": "4.8.0",
     "glob": "7.1.6"
   },
   "devDependencies": {
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.9.0",
+    "@babel/preset-env": "7.9.5",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-prettier": "3.1.2",
@@ -15,13 +32,26 @@
     "prettier": "2.0.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"no test specified\"",
+    "build": "rm -rf build/ && ./antlr Brms.g4 -o build && babel ./build ./src --out-dir ./bin --source-maps --copy-files",
     "test:lint": "npm run test:prettier && npm run test:eslint",
-    "start": "node app.js ./sample.srl",
+    "start": "npm run build && node ./bin/app.js ./sample.srl",
     "prettier": "prettier --write \"src/**/*.js\"",
     "test:eslint": "eslint --config eslintrc.json \"src/**/*.js\"",
     "test:prettier": "prettier --check \"src/**/*.js\""
   },
   "author": "jeremiec",
-  "license": "MIT"
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "10"
+          }
+        }
+      ]
+    ]
+  }
 }
