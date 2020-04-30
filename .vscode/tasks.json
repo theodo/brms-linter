@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: build",
+			"detail": "rm -rf build/ && ./antlr Brms.g4 -o build && babel ./build ./src --out-dir ./bin --source-maps --copy-files"
+		}
+	]
+}
