@@ -1,4 +1,4 @@
-const noSameNameForTwoRules = (rules) => {
+const noSameNameForTwoRules = ({ rules }) => {
   const linterRuleName = 'no same name for two rules in the same file'
   const rulesNames = rules.map((rule) => rule.children[1].toString())
   const hasDuplicates = (array) => new Set(array).size !== array.length
@@ -21,12 +21,12 @@ const noSameNameForTwoRules = (rules) => {
 
 const globalNoSameNameForTwoRules = (listOfAllRules) => {
   return {
-    ...noSameNameForTwoRules(
-      listOfAllRules.reduce(
+    ...noSameNameForTwoRules({
+      rules: listOfAllRules.reduce(
         (rulesAccumulator, rules) => [...rulesAccumulator, ...rules],
         []
-      )
-    ),
+      ),
+    }),
     linterRuleName: 'no same name for two rules in parsed files',
   }
 }
