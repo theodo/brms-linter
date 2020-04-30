@@ -1,6 +1,7 @@
 /*
 Sample file for brms
 
+Priorité de 99 à 200
 
 classic rule
 */
@@ -36,7 +37,7 @@ REGLE "other rule" PRIORITE=100
     FIN
 
 // several assignation
-REGLE "rule named plouf" PRIORITE=100
+REGLE "rule named plouf" PRIORITE=200
     CONTEXTE arg1 (TypeArg1), actions (Actions)
 
     SI actions.step === "nothing as been done"
