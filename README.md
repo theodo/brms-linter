@@ -27,7 +27,7 @@ brmslint './**/*.srl'
 
 - Clone the repository `git clone git@github.com:theodo/brms-linter.git`
 - You need to [install antlr](https://www.antlr.org/download.html)
-- Create a simlink to your installed antlr `ln -sr <path to your installed antlr> <repo path>/antlr`
+- Create a simlink to your installed antlr **jar** `ln -sr <path to your installed antlr> <repo path>/antlr.jar`
 
 ### Run
 

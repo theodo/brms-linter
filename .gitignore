@@ -1,7 +1,7 @@
 build/
 bin/
-.antlr/
 launch-project.sh
 
 node_modules/
-antlr
+.antlr/
+antlr.jar
