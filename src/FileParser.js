@@ -32,7 +32,7 @@ exports.FileParser = {
 
     const singleFileLintValidation = Object.values(singleFileLinterRules).map(
       (linterRuleValidator) => {
-        return linterRuleValidator(rules)
+        return linterRuleValidator({ rules, fileContent })
       }
     )
 

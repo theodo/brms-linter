@@ -35,7 +35,7 @@ const processFiles = (pattern) => (err, files) => {
         .filter(({ result }) => !result)
         .forEach(({ linterRuleName, errors }) => {
           logger.logError(`Error: ${linterRuleName}`)
-          logger.logErrorInfo(errors)
+          errors.forEach((error) => logger.logErrorInfo(error))
         })
     }
     if (syntaxErrors.length > 0 || hasLinterErrors) {
@@ -55,7 +55,7 @@ const processFiles = (pattern) => (err, files) => {
     .filter(({ result }) => !result)
     .forEach(({ linterRuleName, errors }) => {
       logger.logError(`Global Error: ${linterRuleName}`)
-      logger.logErrorInfo(errors)
+      errors.forEach((error) => logger.logErrorInfo(error))
       lintError = true
     })
 
