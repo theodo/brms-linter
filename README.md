@@ -1,5 +1,7 @@
 # Linter for BRMS
 
+![](https://github.com/theodo/brms-linter/workflows/CI/badge.svg)
+
 ## Install the latest release
 
 ```shell
