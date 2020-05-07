@@ -13,7 +13,7 @@ const processFiles = (pattern) => (err, files) => {
   }
   if (files.length === 0) {
     logger.logError(`No files matching the pattern were found: ${pattern}`)
-    process.exit(2)
+    process.exit(3)
   }
 
   logger.logInfo('\n> Processing files')
@@ -67,7 +67,7 @@ const processFiles = (pattern) => (err, files) => {
 const run = () => {
   if (process.argv.length <= 2) {
     console.log('Usage: node app.js path/to/directory|file|glob')
-    process.exit(-1)
+    process.exit(5)
   }
 
   const pattern = process.argv[2]
