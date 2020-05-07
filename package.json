@@ -27,12 +27,14 @@
     "@babel/preset-env": "7.9.5",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
+    "eslint-plugin-jest": "23.9.0",
     "eslint-plugin-prettier": "3.1.2",
     "husky": "4.2.3",
+    "jest": "26.0.1",
     "prettier": "2.0.4"
   },
   "scripts": {
-    "test": "echo \"no test specified\"",
+    "test": "npm run compile-grammar && jest",
     "compile-grammar": "rm -rf src/build/ && ./antlr.sh Brms.g4 -o src/build",
     "build": "npm run compile-grammar && rm -rf bin/ && babel ./src --out-dir ./bin --source-maps --copy-files",
     "test:lint": "npm run test:prettier && npm run test:eslint",

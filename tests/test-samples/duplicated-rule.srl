@@ -1,0 +1,20 @@
+/*
+duplicated-rule
+Priorité de 99 à 200
+*/
+
+REGLE "some rule" PRIORITE=100
+    CONTEXTE arg1 (TypeArg1), actions (Actions)
+
+    SI actions.step === "some step" ET arg1.type === "some type"
+    ALORS
+        actions.nextStep = "some action";
+    FIN
+
+REGLE "some rule" PRIORITE=100
+    CONTEXTE arg1 (TypeArg1), actions (Actions)
+
+    SI actions.step === "some step" ET arg1.type === "some type"
+    ALORS
+        actions.nextStep = "some action";
+    FIN

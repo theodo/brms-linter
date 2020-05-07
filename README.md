@@ -31,7 +31,13 @@ brmslint './**/*.srl'
 
 ### Run
 
-- `npm start` to run it against sample.srl
+- `npm start` to run the cli on [sample.srl](./sample.srl)
+
+### Tests
+
+- `npm test` to run jest tests
+- Tests are described in [`tests/main.js`](./tests/main.js)
+- The used samples files are in `tests/test-samples/**/*.srl`
 
 ### Release :
 

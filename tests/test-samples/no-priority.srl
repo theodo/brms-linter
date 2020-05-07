@@ -1,0 +1,11 @@
+/*
+no-priority sample
+*/
+
+REGLE "some rule" PRIORITE=100
+    CONTEXTE arg1 (TypeArg1), actions (Actions)
+
+    SI actions.step === "some step" ET arg1.type === "some type"
+    ALORS
+        actions.nextStep = "some action";
+    FIN
