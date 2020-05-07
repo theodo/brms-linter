@@ -28,7 +28,11 @@ exports.FileParser = {
     parser.buildParseTrees = true
     parser.removeErrorListeners()
     parser.addErrorListener(brmsSyntaxErrorListener)
-    const { children: rules } = parser.rules()
+    let { children: rules } = parser.rules()
+
+    if (rules === null) {
+      rules = []
+    }
 
     const singleFileLintValidation = Object.values(singleFileLinterRules).map(
       (linterRuleValidator) => {
