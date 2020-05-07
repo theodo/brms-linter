@@ -41,6 +41,6 @@ brmslint './**/*.srl'
 
 ### Release :
 
-- bump package version
-- run `npm run build`
-- run `npm publish --access public`
+- Bump package version: with a clean git history, run `npm version <version_type:patch|minor|major>`
+
+- push to master **preferably using a pull request**
