@@ -1,13 +1,15 @@
 {
+  "ignorePatterns": ["src/build/", "bin/", "node_modules/"],
   "extends": ["eslint:recommended", "prettier"],
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "rules": {
     "prettier/prettier": "error"
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "jest"],
   "parserOptions": {
     "ecmaVersion": 2018
   }

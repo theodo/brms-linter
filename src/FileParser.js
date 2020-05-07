@@ -1,7 +1,7 @@
 const fs = require('fs')
 const antlr4 = require('antlr4')
-const { BrmsLexer } = require('./BrmsLexer')
-const { BrmsParser } = require('./BrmsParser')
+const { BrmsLexer } = require('./build/BrmsLexer')
+const { BrmsParser } = require('./build/BrmsParser')
 const { BrmsSyntaxErrorListener } = require('./BrmsSyntaxErrorListener')
 const {
   linterRules: { singleFileLinterRules },
@@ -28,7 +28,11 @@ exports.FileParser = {
     parser.buildParseTrees = true
     parser.removeErrorListeners()
     parser.addErrorListener(brmsSyntaxErrorListener)
-    const { children: rules } = parser.rules()
+    let { children: rules } = parser.rules()
+
+    if (rules === null) {
+      rules = []
+    }
 
     const singleFileLintValidation = Object.values(singleFileLinterRules).map(
       (linterRuleValidator) => {

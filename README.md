@@ -31,10 +31,16 @@ brmslint './**/*.srl'
 
 ### Run
 
-- `npm start` to run it against sample.srl
+- `npm start` to run the cli on [sample.srl](./sample.srl)
+
+### Tests
+
+- `npm test` to run jest tests
+- Tests are described in [`tests/main.js`](./tests/main.js)
+- The used samples files are in `tests/test-samples/**/*.srl`
 
 ### Release :
 
-- bump package version
-- run `npm run build`
-- run `npm publish --access public`
+- Bump package version: with a clean git history, run `npm version <version_type:patch|minor|major>`
+
+- push to master **preferably using a pull request**

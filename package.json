@@ -1,6 +1,6 @@
 {
   "name": "brmslint",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "A linter for BRMS",
   "main": "bin/app.js",
   "preferGlobal": true,
@@ -27,18 +27,21 @@
     "@babel/preset-env": "7.9.5",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
+    "eslint-plugin-jest": "23.9.0",
     "eslint-plugin-prettier": "3.1.2",
     "husky": "4.2.3",
+    "jest": "26.0.1",
     "prettier": "2.0.4"
   },
   "scripts": {
-    "test": "echo \"no test specified\"",
-    "build": "rm -rf build/ && ./antlr.sh Brms.g4 -o build && babel ./build ./src --out-dir ./bin --source-maps --copy-files",
+    "test": "npm run compile-grammar && jest",
+    "compile-grammar": "rm -rf src/build/ && ./antlr.sh Brms.g4 -o src/build",
+    "build": "npm run compile-grammar && rm -rf bin/ && babel ./src --out-dir ./bin --source-maps --copy-files",
     "test:lint": "npm run test:prettier && npm run test:eslint",
-    "start": "npm run build && node ./bin/app.js ./sample.srl",
-    "prettier": "prettier --write \"src/**/*.js\"",
-    "test:eslint": "eslint --config eslintrc.json \"src/**/*.js\"",
-    "test:prettier": "prettier --check \"src/**/*.js\""
+    "start": "npm run compile-grammar && node ./src/app.js ./sample.srl",
+    "prettier": "prettier --write \"**/*.js\"",
+    "test:eslint": "eslint --config eslintrc.json \"**/*.js\"",
+    "test:prettier": "prettier --check \"**/*.js\""
   },
   "author": "jeremiec",
   "license": "MIT",
