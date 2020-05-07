@@ -1,4 +1,4 @@
-build/
+src/build/
 bin/
 launch-project.sh
 

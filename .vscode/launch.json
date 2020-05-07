@@ -15,7 +15,7 @@
         "${workspaceFolder}/sample.srl"
       ],
       "preLaunchTask": "${defaultBuildTask}",
-      "program": "${workspaceFolder}/bin/app.js"
+      "program": "${workspaceFolder}/src/app.js"
     }
   ]
 }

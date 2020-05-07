@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": ["src/build/", "bin/", "node_modules/"],
   "extends": ["eslint:recommended", "prettier"],
   "env": {
     "es6": true,
